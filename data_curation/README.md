@@ -6,4 +6,8 @@
 
 `future_permafrost_analysis.py` Intersect PLD (lake inventory) with future warming scenarios from Cadburn et al., 2017
 
+`make_global_grid` Run in Google Earth Engine code editor; creates global equal area grid
+
+`make_northern_grid` Run in Google Earth Engine code editor; creates equal area grid for land north of 50 DegN
+
 Code used to generate lake density and coverage across the northern permafrost region is archived through the Arctic Data Center (LINK), along with the GeoPackage of lake density and coverage.
