@@ -4,7 +4,7 @@ library(ggplot2)
 library(rnaturalearth)
 
 # ── File paths ───────────────────────────────────────────────────────────────
-future_pf_path <- 'future_PLD_rotated.gpkg'
+future_pf_path <- 'future_PLD.gpkg'
 domain_path    <- "latitude_50N_EPSG3575.shp"
 out_path       <- "futurePFmap_2deg.png"
 
