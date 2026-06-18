@@ -1,0 +1,81 @@
+var grid_scale = 50000
+
+// 100000 // 100 km
+////////////////
+//// (1) CREATE LAND MASK
+////////////////
+var dataset = ee.Image('COPERNICUS/Landcover/100m/Proba-V-C3/Global/2019')
+.select('discrete_classification');
+var landmask = dataset.lte(150)
+
+////////////////
+//// (2) CREATE GRID
+////////////////
+
+
+var modis = ee.ImageCollection('MODIS/006/MOD44W').first();
+var equalAreaProjection = modis.projection().atScale(grid_scale);
+
+// Define a bounding box that covers the whole earth
+var region = ee.Geometry.Rectangle([-180, -85, 180, 85], null, false);
+
+// Create the equal-area grid using coveringGrid()
+var grid = region.coveringGrid({
+  proj: equalAreaProjection,
+  scale: grid_scale  
+});
+
+
+////////////////
+//// (3) GET RID OF OCEANS IN GRID
+////////////////
+var gridWithLandArea = grid.map(function(cell) {
+  var cellGeom = cell.geometry();
+  var totalArea = cellGeom.area({maxError: 1});
+  
+  var landValue = landmask.reduceRegion({
+  reducer: ee.Reducer.mean(),
+  geometry: cellGeom,
+  scale: grid_scale / 10,
+  maxPixels: 1e9
+}).values().get(0);
+
+// Check if landValue is null, if yes assign 0, else convert to number
+var landPercentage = ee.Algorithms.If(
+  landValue, ee.Number(landValue),0);
+  
+  return cell.set({
+    'grid_area_sqm': totalArea,
+    'land_proportion': landPercentage,
+    'land_area_sqm': totalArea.multiply(landPercentage)
+  });
+});
+
+// Filter to keep cells with at least some land 
+var landGrid = gridWithLandArea.filter(ee.Filter.gt('land_proportion', 0));
+
+////////////////
+//// (4) ADD INDEX TO TRACK AND ITERATE THROUGH GRID CELLS
+////////////////
+
+// Add an Id column to the featureCollection indexed from 0
+var indexes = landGrid.aggregate_array('system:index');
+var ids = ee.List.sequence(0, indexes.size().subtract(1));
+var idByIndex = ee.Dictionary.fromLists(indexes, ids);
+var final_dataset = landGrid.map(function(feature) {
+  return feature.set('id', idByIndex.get(feature.get('system:index')));
+});
+
+////////////////
+//// (5) EXPORT TO ASSET
+////////////////
+
+var finalscale = ee.Number(grid_scale).divide(1000).getInfo()
+
+
+Export.table.toDrive({
+  collection: final_dataset,
+  folder:'global_grid',
+  fileFormat: 'shp',
+  description: 'Grid_global_' + finalscale + 'km'})
+
