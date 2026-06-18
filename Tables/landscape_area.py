@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """
-northern_pf_land_area_table.py
 ================================
 Calculates total land area (km²) within the northern permafrost domain
 (>50°N, EXTENT = C/D/I/S) for each landscape attribute category.
