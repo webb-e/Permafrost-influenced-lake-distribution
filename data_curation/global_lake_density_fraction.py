@@ -49,7 +49,7 @@ GRID_FP = ("Grid_global_50km_non_glacier_area.gpkg")
 LAKES_GDB_PATH  = r"/SWOT_PLD_v201_02042025_attributes_updated.gdb"
 LAKES_GDB_LAYER = "SWOT_PLD_v201_02042025_attributes_updated"
 
-ON_GLACIER_CSV = (r"Lake distribution/PF_PLD/PLD_PF_global.csv")
+ON_GLACIER_CSV = (r"PLD_PF_global.csv")
 
 OUTPUT_DIR = (/global_lake_density_fraction")
 
