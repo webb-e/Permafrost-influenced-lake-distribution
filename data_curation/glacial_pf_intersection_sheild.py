@@ -47,7 +47,7 @@ grid_fp            = os.path.join(_BASE, "Northern_grid_50km.shp")
 glaciers_fp        = os.path.join(_BASE, "glaciers_reprojected.shp") ## GLIMS and NSIDC 2026
 shield_fp          = (r"canadian_shield_reprojected.shp") ## Natural Resources Canada 2022
 
-lakes_fp = (PLD_PF.gpkg")
+lakes_fp = (PLD_PF.gpkg)
 
 out_dir  = ()
 out_path = os.path.join(out_dir, "PF_x_Glaciation.gpkg")
