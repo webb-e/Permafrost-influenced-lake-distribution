@@ -1,8 +1,8 @@
 `global_PF_extent.py` Determine whether lakes intersect with glaciers and are within the permafrost region
 
-`create_PF_PLD.py` Intersect PLD (lake inventory) with geospatial datasets to assign landscape characteristic attributes
+`create_PF_PLD.py` Determine which lakes are within the northern permafrost region and intersect lakes with geospatial datasets to assign landscape characteristic attributes
 
-`glacial_pf_intersection_sheild.py` Stratify permafrost extent by glacial history and the Canadian Shield
+`glacial_pf_intersection_sheild.py` Stratify permafrost extent by glacial history and the Canadian Shield; determine lake density and coverage
 
 `future_permafrost_analysis.py` Intersect PLD (lake inventory) with future warming scenarios from Cadburn et al., 2017
 
