@@ -8,7 +8,7 @@
 
 `glacial_pf_intersection_sheild.py` Stratify permafrost extent by glacial history and the Canadian Shield; determine lake density and coverage. Relies on `PLD_PF.gpkg`, which is an output of `create_PF_PLD.py`; `Northern_grid_50km.shp`, which is an output of `make_northern_grid`; and landscape characterstic shapefiles; see main paing for references.
 
-`future_permafrost_analysis.py` Intersect PLD (lake inventory) with future warming scenarios from Cadburn et al., 2017. Relies on data from Chadburn et al., 2017 and Brown et al., 2002; see main paige for references.
+`future_permafrost_analysis.py` Intersect PLD (lake inventory) with future warming scenarios from Cadburn et al., 2017. Relies on data from Chadburn et al., 2017 and Brown et al., 2002; see main page for references.
 
 `make_global_grid` Run in Google Earth Engine code editor; creates global equal area grid
 
