@@ -2,7 +2,7 @@
 
 `global_lake_density_fraction.py` Calculates global lake density and fraction (coverage). Relies on `PLD_PF.gpkg`, which is an output of `create_PF_PLD.py`;  `Grid_global_50km_non_glacier_area.gpkg`, which is an output of `global_area_grid.py`; and global lakes inventory, see main page for references
 
-`global_grid_area.py` Calculates the area of land that is not currently occupied by glaciers using the global grid. Relies on `Grid_global_50km.shp`, which an output of make_global_grid`; and GLIMS and NSIDC 2026; see main page for references
+`global_grid_area.py` Calculates the area of land that is not currently occupied by glaciers using the global grid. Relies on `Grid_global_50km.shp`, which an output of `make_global_grid`; and GLIMS and NSIDC 2026; see main page for references
 
 `create_PF_PLD.py` Determine which lakes are within the northern permafrost region and intersect lakes with geospatial datasets to assign landscape characteristic attributes. Relies on landscape characteristic shapefiles and global lakes inventory; see main page for references.
 
