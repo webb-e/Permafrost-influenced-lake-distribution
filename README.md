@@ -12,8 +12,8 @@ This repository is organized into folders as follows:
 #Data Sources:
 Permafrost and ground ice extent: Brown et al 2002), 
 
-Glacial history (Batchelor et al 2025):
-    Batchelor, C. L., Krapp, M., Manica, A., & Murton, D. K. (2025). The Configuration of Northern Hemisphere Ice Sheets Through the Quaternary     [Data set]. OSF. https://doi.org/0.17605/OSF.IO/7JEN3
+Glacial history (Batchelor et al 2025)
+        Batchelor, C. L., Krapp, M., Manica, A., & Murton, D. K. (2025). The Configuration of Northern Hemisphere Ice Sheets Through the Quaternary     [Data set]. OSF. https://doi.org/0.17605/OSF.IO/7JEN3
 
 Biome classification (Olson et al 2001), 
 
