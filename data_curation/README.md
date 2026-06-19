@@ -1,4 +1,4 @@
-`global_PF_extent.py` Determine whether lakes intersect with glaciers and are within the permafrost region. Requires PLD_PF.gpkg`, which is an output of `create_PF_PLD.py`, landscape characteristic shapefiles and global lakes inventory; see main page for references.
+`global_PF_extent.py` Determine whether lakes intersect with glaciers and are within the permafrost region. Requires `PLD_PF.gpkg`, which is an output of `create_PF_PLD.py`, landscape characteristic shapefiles and global lakes inventory; see main page for references.
 
 `global_lake_density_fraction.py` Calculates global lake density and fraction (coverage). Relies on `PLD_PF.gpkg`, which is an output of `create_PF_PLD.py`;  `Grid_global_50km_non_glacier_area.gpkg`, which is an output of `global_area_grid.py`; and global lakes inventory, see main page for references
 
