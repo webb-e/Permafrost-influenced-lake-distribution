@@ -20,7 +20,7 @@ Biome classification (Olson et al., 2001)
 - Olson, D. M., Dinerstein, E., Wikramanayake, E. D., Burgess, N. D., Powell, G. V. N., Underwood, E. C., et al. (2001). Terrestrial Ecoregions of the World: A New Map of Life on Earth: A new global map of terrestrial ecoregions provides an innovative tool for conserving biodiversity. BioScience, 51(11), 933–938. https://doi.org/10.1641/0006-3568(2001)051%5B0933:TEOTWA%5D2.0.CO;2
 
 Thermokarst lake and wetland landscape coverage (Olefeldt et al 2016)
--Olefeldt, D., Goswami, S., Grosse, G., Hayes, D., Hugelius, G., Kuhry, P., Mcguire, A. D., et al. (2016). Circumpolar distribution and carbon storage of thermokarst landscapes. Nature Communications, 7, 1–11. https://doi.org/10.1038/ncomms13043
+- Olefeldt, D., Goswami, S., Grosse, G., Hayes, D., Hugelius, G., Kuhry, P., Mcguire, A. D., et al. (2016). Circumpolar distribution and carbon storage of thermokarst landscapes. Nature Communications, 7, 1–11. https://doi.org/10.1038/ncomms13043
 - Olefeldt, D., Goswami, S., Grosse, G., Hayes, D. J., Hugelius, G., Kuhry, P., et al. (2016). Arctic Circumpolar Distribution and Soil Carbon of Thermokarst Landscapes, 2015 (Version V1) [Data set]. Oak Ridge, Tennessee, USA: ORNL DAAC. https://doi.org/10.3334/ORNLDAAC/1332
 
 Yedoma presence (Strauss et al 2021)
