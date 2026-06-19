@@ -4,7 +4,7 @@
 
 `Figure 3`: Geographic extent of landscape settings across the northern permafrost region. Requires landscape characteristics input shapefiles; see main page for references.
 
-`Figure 4`: Lake density/coverage across permafrost zones for unglaciated,  glaciated and Shield landscapes 
+`Figure 4`: Lake density/coverage across permafrost zones for unglaciated,  glaciated and Shield landscapes. Requires `PF_x_Glaciation.csv`, which is an output of `data_curation/glacial_pf_intersection.py` 
 
 `Figure 6`: Projected changes to the geographic range of northern permafrost lakes. Requires a rotated version of `future_PLD.gpkg`, which is an output of `data_curation/future_permafrost_analysis.py`
 
