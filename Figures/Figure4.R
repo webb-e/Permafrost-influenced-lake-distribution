@@ -91,3 +91,22 @@ fig4 <- p_dens | p_cov
 
 ggsave('Fig4.png',
        fig4, width = 9.5, height = 4.8, dpi = 300)
+
+## ── 4. SPEARMAN RANK CORRELATIONS: PF × GLACIATION ──────────────────────────
+
+# Order permafrost classes by extent: Isolated = 1 ... Continuous = 4
+pf_rank <- c(Isolated = 1, Sporadic = 2, Discontinuous = 3, Continuous = 4)
+
+rho_df <- all_long %>%
+  mutate(pf_rank = pf_rank[as.character(permafrost)])
+
+# Add combined glaciated group (Shield + non-Shield)
+rho_df <- bind_rows(rho_df,rho_df %>% filter(region != "Unglaciated") %>% mutate(region = "Glaciated · All"))
+
+rho_results <- rho_df %>%
+  group_by(variable, region) %>%
+  summarise(n_cells = n(),
+    rho     = cor(value, pf_rank, method = "spearman"),
+    .groups = "drop")
+
+rho_results
