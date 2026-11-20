@@ -20,11 +20,13 @@ summarise_lakes <- function(poly_area) {
 
 make_row <- function(category, subcategory, poly_area,
                      total_pf_area, total_pf_n,
-                     global_area, global_n) {
+                     global_area, global_n,
+                     land_key = subcategory) {
   s <- summarise_lakes(poly_area)
   data.table(
     Category                                   = NA_character_,
     Subcategory                                = subcategory,
+    land_key                                   = land_key,
     `Total Lake area (km2)`                    = round(s$total_area, 0),
     `% of lake area within northern PF region` = round(s$total_area / total_pf_area * 100, 1),
     `% of global lake area`                    = round(s$total_area / global_area   * 100, 1),
@@ -40,6 +42,7 @@ header_row <- function(category) {
   data.table(
     Category                                   = category,
     Subcategory                                = NA_character_,
+    land_key                                   = NA_character_,
     `Total Lake area (km2)`                    = NA_real_,
     `% of lake area within northern PF region` = NA_real_,
     `% of global lake area`                    = NA_real_,
@@ -107,19 +110,29 @@ classify_tk <- function(col_vals) {
 pld[, tk_lakes_class    := classify_tk(thermokarst_lakes)]
 pld[, tk_wetlands_class := classify_tk(thermokarst_wetlands)]
 
+# Land-area keys — EDIT these to match the names in northern_pf_land_area.csv
+tk_lakes_keys    <- c("None"           = "TK lakes: None",
+                      "Low/moderate"   = "TK lakes: Low/moderate",
+                      "High/very high" = "TK lakes: High/very high")
+tk_wetlands_keys <- c("None"           = "TK wetlands: None",
+                      "Low/moderate"   = "TK wetlands: Low/moderate",
+                      "High/very high" = "TK wetlands: High/very high")
+
 rows_tk <- rbindlist(c(
   list(header_row("Thermokarst conditions")),
   list(header_row("Thermokarst Lakes")),
   lapply(tk_levels, function(lv) {
     make_row("Thermokarst conditions", lv,
              pld[tk_lakes_class == lv, poly_area],
-             total_pf_area, total_pf_n, global_area, global_n)
+             total_pf_area, total_pf_n, global_area, global_n,
+             land_key = tk_lakes_keys[[lv]])
   }),
   list(header_row("Thermokarst Wetlands")),
   lapply(tk_levels, function(lv) {
     make_row("Thermokarst conditions", lv,
              pld[tk_wetlands_class == lv, poly_area],
-             total_pf_area, total_pf_n, global_area, global_n)
+             total_pf_area, total_pf_n, global_area, global_n,
+             land_key = tk_wetlands_keys[[lv]])
   })))
 
 # ──────────────────────────────────────────────────────────────
@@ -168,7 +181,8 @@ rows_yedoma <- rbindlist(list(
 
 row_shield <- make_row("Canadian Shield", "Canadian Shield",
                        pld[shield == TRUE, poly_area],
-                       total_pf_area, total_pf_n, global_area, global_n)
+                       total_pf_area, total_pf_n, global_area, global_n,
+                       land_key = "Canadian Shield")
 row_shield[, Category    := "Canadian Shield"]
 row_shield[, Subcategory := NA_character_]
 
@@ -178,6 +192,7 @@ row_shield[, Subcategory := NA_character_]
 row_pf_total <- data.table(
   Category                                   = "Entire northern permafrost domain",
   Subcategory                                = NA_character_,
+  land_key                                   = "Entire northern permafrost domain",
   `Total Lake area (km2)`                    = round(total_pf_area, 0),
   `% of lake area within northern PF region` = 100.0,
   `% of global lake area`                    = round(total_pf_area / global_area * 100, 1),
@@ -190,6 +205,7 @@ row_pf_total <- data.table(
 row_global <- data.table(
   Category                                   = "Globally",
   Subcategory                                = NA_character_,
+  land_key                                   = NA_character_,
   `Total Lake area (km2)`                    = global_area,
   `% of lake area within northern PF region` = NA_real_,
   `% of global lake area`                    = NA_real_,
@@ -216,10 +232,17 @@ table1 <- rbindlist(list(
 # ──────────────────────────────────────────────────────────────
 # ── join land area ────────────────────────────────────────────
 # ──────────────────────────────────────────────────────────────
-# Match on Subcategory first; fall back to Category for header/total rows
-lookup_key <- fifelse(!is.na(table1$Subcategory), table1$Subcategory, table1$Category)
-table1[, `Land area (km2)` := land[match(lookup_key, Category), land_area_km2]]
+table1[, `Land area (km2)` := land[match(table1$land_key, Category), land_area_km2]]
 table1[Category == "Globally", `Land area (km2)` := 134573595]
+
+# Flag any data rows that didn't find a land area
+missing_land <- table1[!is.na(land_key) & is.na(`Land area (km2)`), .(Subcategory, land_key)]
+if (nrow(missing_land) > 0) {
+  warning("No land area match for these keys:")
+  print(missing_land)
+}
+
+table1[, land_key := NULL]
 
 # Reorder so Land area appears after Subcategory
 setcolorder(table1, c("Category", "Subcategory", "Land area (km2)"))
